@@ -1,0 +1,18 @@
+{
+  "targets": {
+    "srinews-3002b": {
+      "hosting": {
+        "uena": [
+          "srinews-3002b"
+        ]
+      }
+    },
+    "loan-cal-e6283": {
+      "hosting": {
+        "uena": [
+          "loan-cal-e6283"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,338 @@
+<!--**********************************
+    Content body start
+***********************************-->
+<div class="nav-header" >
+  <a  class="brand-logo">
+<img src="../../../assets/images/logo.png" width="60px">
+
+  </a>
+
+</div>
+<div class="content-body" >
+    <!-- row -->
+    <div class="container-fluid">
+        <div class="row ">
+            <div class="col-xl-12 col-xxl-12 ">
+                <div class="row">
+                  <div class="col-xl-4 col-xxl-4 col-lg-4 col-sm-4" *ngFor="let element of element">
+                    <div class="widget-stat card " style="border-radius: 1rem;" >
+                      <img src="{{element.image}}" style="border-radius: 1rem;" width="100%" height="100%" >
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 " style="text-align: center;">
+          <div class="col-xl-12 col-xxl-12 ">
+              <h1 style="color: yellow;"> ඔබගේ ණය අවශ්‍යතාව ඇතුළත් කරන්න</h1>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-xl-12 col-xxl-12 ">
+              <div class="row">
+                <div class="col-xl-3 col-xxl-3 col-lg-3 col-sm-3 mt-1">
+                  <input type="text" class="form-control" style="border-radius: 1rem;text-align: center;color: rgb(43, 44, 44);"  [(ngModel)]="this.LeadName"   placeholder="නම">
+                </div>
+                <div class="col-xl-3 col-xxl-3 col-lg-3 col-sm-3  mt-1">
+                  <input type="text" class="form-control" style="border-radius: 1rem;text-align: center;color: rgb(43, 44, 44);"  [(ngModel)]="this.contact"  placeholder="දුරකතන අංකය">
+                </div>
+                <div class="col-xl-3 col-xxl-3 col-lg-3 col-sm-3  mt-1">
+                  <select style="border-radius: 1rem;text-align: center;color: rgb(43, 44, 44);" [(ngModel)]="this.categoryname" class="form-control" name='moduleId' >
+                    <option style="color: rgb(43, 44, 44);" selected value="null">{{moduleName}}</option>
+                    <option style="color: rgb(43, 44, 44);" *ngFor="let catnames of this.LoanList" value="{{catnames.name}}">{{catnames.name}}</option>
+                  </select>
+                </div>
+                <div class="col-xl-3 col-xxl-3 col-lg-3 col-sm-3  mt-1">
+                  <input type="text" class="form-control" style="border-radius: 1rem;text-align: center;color: rgb(43, 44, 44);"  [(ngModel)]="this.amount"  placeholder="ණය ප්‍රමාණය">
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="center mt-2">
+          <p>{{AddformSubmitError}}</p>
+        </div>
+        <div class="row mt-3 " style="text-align: center;">
+          <div class="col-xl-12 col-xxl-12 ">
+              <button type="submit" class="btn btn-info mr-2"  style="border-radius: 2rem;width: 300px;height: 50px;text-align: center;" (click)="AddformSubmit()">තහවුරු කරන්න</button>
+          </div>
+        </div>
+
+        <div class="row mt-5 " style="text-align: center;">
+          <div class="col-xl-12 col-xxl-12 ">
+              <h1 style="color: yellow;"> වාරිකය ගණනය කරන්න</h1>
+          </div>
+        </div>
+
+        <div class="col-lg-12" style="text-align: center;">
+            <div class="form-group mb-0 mt-3">
+              <botton type="button" class="btn btn-rounded btn-light m-1 pointer cbuttonw" *ngFor="let category of Loancategory" [class.serviceselected]="serviceType.name == category.name"
+              (click)="SelectServiceType(category.name,category.docid,category.calMethod,category.Duration)"
+             >{{category.name}}</botton>
+            </div>
+        </div>
+
+        <div class="container">
+          <div class="row mt-5" >
+            <div class="col-xl-12 col-xxl-12" >
+              <div class="card pt-4 pb-4 pl-4 pr-4" style="background-color: rgba(202, 207, 209, 0.788);">
+                <div class="col-xl-12 col-xxl-12">
+                  <div class="row">
+
+                    <div class="col-xl-8 col-xxl-8 col-lg-6 col-sm-12" style="text-align: left;" >
+                      <form [formGroup]="firstForm" >
+
+
+                        <div class="row">
+                          <div class="col-xl-6 col-xxl-6 col-lg-12 col-sm-12" >
+                            <div class="card-header border-0 pb-0" >
+                              <p class="card-text" style="color: black;">I would like to borrow</p>
+                            </div>
+                          </div>
+                          <div class="col-xl-6 col-xxl-6 col-lg-12 col-sm-12" >
+                            <div class="input-group input-group-sm  mt-4" style="border-radius: 2rem;">
+                              <div class="input-group-prepend">
+                                  <span class="input-group-text">LKR</span>
+                                </div>
+                                <input type="number"  formControlName="num1" name="num1" [(ngModel)]="this.num1" (input)="check($event)" class="form-control fsize" placeholder="0" style="text-align: right;">
+                            </div>
+                            <div class="mt-1" *ngIf="error"  style="font-size: 12px;color: red;" >{{error}}</div>
+                          </div>
+                        </div>
+
+
+
+                        <div class="row">
+                          <div class="col-xl-6 col-xxl-6 col-lg-12 col-sm-12" >
+                            <div class="card-header border-0 pb-0">
+                              <p class="card-text" style="color: black;">Over a long term of(years)</p>
+                            </div>
+                            <div style="text-align: left;">
+                              <p class="fs-12 mb-0" style="color: rgb(122, 121, 121);margin-left: 30px;">You can select loan term between 1 & 20 years</p>
+                            </div>
+                          </div>
+                          <div class="col-xl-6 col-xxl-6 col-lg-12 col-sm-12" >
+                            <div class="row mt-4">
+                              <div class="col-6">
+                                <select class="form-control form-control-sm fsize"   formControlName="num2" (input)="check2($event)" [(ngModel)]="this.num2" style="border-radius: 2rem;" required>
+                                  <option value="99">Year(s)</option>
+                                  <option *ngFor="let in of counter(this.years) ;let i = index" value="{{i+1}}">{{i+1}}</option>
+
+
+                                </select>
+                                <div class="mt-1" *ngIf="error2" style="font-size: 12px;color: red;" >{{error2}}</div>
+                              </div>
+                              <div class="col-6">
+                                <select class="form-control form-control-sm default-select fsize"  formControlName="num3" (input)="check3($event)"  [(ngModel)]="this.num3" style="border-radius: 2rem;" required >
+                                  <option value="99">Month(s)</option>
+                                  <option value="0">0</option>
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                  <option value="5">5</option>
+                                  <option value="6">6</option>
+                                  <option value="7">7</option>
+                                  <option value="8">8</option>
+                                  <option value="9">9</option>
+                                  <option value="10">10</option>
+                                  <option value="11">11</option>
+                                </select>
+                                <div class="mt-1" *ngIf="error3" style="font-size: 12px;color: red;" >{{error3}}</div>
+                              </div>
+                            </div>
+
+                          </div>
+
+                        </div>
+
+
+                        <div class="row">
+                          <div class="col-xl-6 col-xxl-6 col-lg-12 col-sm-12" >
+                            <div class="card-header border-0 pb-0">
+                              <p class="card-text" style="color: black;">Repayent Method</p>
+                            </div>
+                          </div>
+                          <div class="col-xl-6 col-xxl-6 col-lg-12 col-sm-12" >
+                              <select class="form-control form-control-sm default-select mt-4 fsize"    formControlName="select" (input)="check4($event)" style="border-radius: 2rem;" [(ngModel)]="this.select" required>
+                                <option selected value="1">Equated Balance</option>
+                                <option value="2" [attr.disabled]="calMethodValue ? '' : null">Reducing Balance</option>
+                              </select>
+                              <div class="mt-1" *ngIf="error5" style="font-size: 12px;color: red;" >{{error5}}</div>
+                          </div>
+                        </div>
+
+
+                        <div class="row mb-3">
+                          <div class="col-xl-6 col-xxl-6 col-lg-12 col-sm-12" >
+                            <div class="card-header border-0 pb-0">
+                              <p class="card-text" style="color: black;text-align: left;">With an interest rate of</p>
+                            </div>
+                          </div>
+                          <div class="col-xl-6 col-xxl-6 col-lg-12 col-sm-12" >
+                            <div class="input-group input-group-sm  mt-4"  style="border-radius: 2rem;">
+                              <input type="number" class="form-control fsize"  formControlName="num4" [(ngModel)]="this.num4" (input)="check5($event)" style="text-align: right;" placeholder="0" required>
+                              <div class="input-group-append">
+                                <span class="input-group-text fsize">%p.a</span>
+                              </div>
+                            </div>
+                            <div class="mt-1" *ngIf="error4" style="font-size: 12px;color: red;" >{{error4}}</div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+
+                          <div class="col-xl-6 col-xxl-6 col-lg-12 col-sm-12" >
+                          </div>
+                          <div class="col-xl-6 col-xxl-6 col-lg-12 col-sm-12" >
+                            <div class="row mb-4">
+                              <div class="col-3">
+                                <button type="button" class="btn btn-rounded btn-outline-light btn-xs" (click)="reset()" >Reset</button>
+                              </div>
+                              <div class="col-9" style="text-align: right;">
+                                <button type="button" class="btn btn-rounded btn-danger btn-xs mr-1 " (click)="Add()" >Calculate</button>
+                                <button type="button" class="btn btn-rounded btn-light btn-xs"><i class="fa fa-print" aria-hidden="true"></i>
+                                  </button>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </form>
+                    </div>
+
+
+                    <div class="col-xl-4 col-xxl-4 col-lg-6 col-sm-12">
+                      <div class="card" style="background-color: rgb(216, 205, 189);border-radius: 1rem;">
+                        <div class="card-body p-3" style="font-size: 14px;">
+
+                          <div class="col-12">
+                            <p class="card-text mt-2" style="color: rgb(46, 46, 46);" >ESTIMATED MONTHLY INSTALLMENT </p>
+                            <div class="form-group">
+                              <div class="input-group input-group-lg ">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text ">LKR</div>
+                                </div>
+                                <input type="text" class="form-control"  onchange="setTwoNumberDecimal" min="0" max="10" step="0.25" placeholder="0.00" readonly [(ngModel)]="this.Result">
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-12 mt-3" hidden>
+                              <div class="row ">
+                                <div class="col-6 " style="text-align: left;">
+                                  <div class="">
+                                    <p class="card-text" style="color: rgb(73, 72, 72);font-size: 12px;">Capital payment</p>
+                                  </div>
+                                 <div style="text-align: left;">
+                                    <p class="fs-12 mb-0" style="color: rgb(122, 121, 121);font-size: 0px;">(1st month)</p>
+                                  </div>
+                                </div>
+
+                                <div class="col-6 mt-2" style="text-align: right;">
+                                  <div class="">
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row mt-3">
+                                <div class="col-6 " style="text-align: left;">
+                                  <div class="">
+                                      <p class="card-text" style="color: rgb(73, 72, 72);font-size: 12px;">Interest payment</p>
+                                  </div>
+                                  <div style="text-align: left;">
+                                      <p class="fs-12 mb-0" style="color: rgb(122, 121, 121);font-size: 0px;">(1st month)</p>
+                                  </div>
+                                </div>
+                                <div class="col-6 mt-2" style="text-align: right;">
+                                  <div class="">
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row mt-2" style="text-align: center;">
+            <div class="col-xl-12 col-xxl-12">
+              <div class="card pt-1 pb-4 pl-4 pr-4" style="background-color: rgba(202, 207, 209, 0.788);">
+                <div class="table-responsive p-2">
+                  <table class="table table-striped">
+                    <thead>
+                    <tr>
+                    <th scope="col" style="color: black;">Bank Name</th>
+                    <th scope="col" style="color: black;">Interest Rate</th>
+                    <th scope="col" style="color: black;">Monthly Installment</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let result of TableResults">
+                      <td style="color: rgb(22, 20, 20);" *ngIf="result.InterestRate !=0" >{{result.BankName}}</td>
+                      <td style="color: rgb(22, 20, 20);" *ngIf="result.InterestRate !=0">{{result.InterestRate}}</td>
+                      <td style="color: rgb(22, 20, 20);" *ngIf="result.InterestRate !=0">{{result.MonthlyInstallment}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <a
+        type="button"
+        class="btn btn-rounded btn-danger btn-xs"
+        id="btn-back-to-top"
+        href="#bottom"
+        >
+        <mat-icon aria-hidden="false" aria-label="Example home icon">reorder</mat-icon>
+  </a>
+  <div id="bottom"></div>
+    <div class="footer">
+        <div  class="row pl-5 pl-5">
+            <div  class="col-4 p-3">
+              <h3 >About us</h3>
+              <p  class="text-justify">
+                {{(this.Aboutus.length>firstCount) ? (Aboutus | slice:0:countera)+'.':(Aboutus) }}
+                <span class="badge badge-rounded badge-info pointer" *ngIf="(Aboutus.length>100)" (click)="toggleaboutus($event)"  >
+                  {{showTxta}}
+               </span>
+               </p>
+            </div>
+            <div  class="col-4 p-3">
+              <h3 >Disclaimer</h3>
+              <p  class="text-justify">
+                {{(this.Disclaimer.length>firstCount) ? (Disclaimer | slice:0:counterd)+'.':(Disclaimer) }}
+                <span class="badge badge-rounded badge-info pointer" *ngIf="(Aboutus.length>100)" (click)="toggledis($event)"  >
+                  {{showTxtd}}
+               </span>
+               </p>
+            </div>
+              <div  class="col-4 p-3">
+                <h3 >Contact us</h3>
+                <p> Email : help@mon.lk</p>
+                <p> Hotline : 0741147771</p>
+              </div>
+        </div>
+
+        <div  class="copyright">
+          <p > Developed by <a  href="https://codestage.lk/" target="_blank">Codestage</a> 2021</p>
+        </div>
+    </div>
+</div>
+<!--**********************************
+    Content body end
+***********************************-->
